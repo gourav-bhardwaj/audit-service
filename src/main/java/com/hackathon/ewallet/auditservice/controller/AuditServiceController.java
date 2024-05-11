@@ -12,12 +12,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.hackathon.ewallet.auditservice.dto.TransactionDto;
 import com.hackathon.ewallet.auditservice.serviceImpl.AuditServiceImpl;
 
+import io.swagger.annotations.ApiOperation;
+
 @Controller
 @RequestMapping("/auditDetails")
 public class AuditServiceController {
 	
 	AuditServiceImpl serviceInstance;
 	
+	@ApiOperation(value = "Get a single transaction by ID")
 	@GetMapping("/transactions/{id}")
     public ResponseEntity<TransactionDto> getSingleTransaction(@PathVariable Long id) {
         TransactionDto singleTransaction = serviceInstance.getAuditDetailsByTransactioId(id);
