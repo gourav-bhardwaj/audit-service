@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "account")
+@Table(name = "accounts")
 public class Account {
 
     @Id
@@ -22,11 +22,12 @@ public class Account {
     @Column(name = "account_number")
     private String accountNumber;
 
-    @Column(name = "onboarding_status_id")
+    @OneToOne
+    @JoinColumn(name = "onboarding_status_id", referencedColumnName = "id")
     private OnBoardingStatus onBoardingStatusId;
 
     @OneToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private User userId;
 
 }

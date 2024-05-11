@@ -7,13 +7,13 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 public class User {
 
     @Id
     @SequenceGenerator(name = "user_id_seq", initialValue = 1, allocationSize = 1)
     @GeneratedValue(generator = "user_id_seq", strategy = GenerationType.SEQUENCE)
-    @Column(name = "id", nullable = false)
+    @Column(name = "user_id", nullable = false)
     private Long id;
 
     @Column(name = "name")
