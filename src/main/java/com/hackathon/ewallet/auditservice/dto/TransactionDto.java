@@ -1,20 +1,31 @@
-package com.hackathon.ewallet.auditservice.entity;
-
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+package com.hackathon.ewallet.auditservice.dto;
 
 import java.time.LocalDateTime;
 
+import com.hackathon.ewallet.auditservice.entity.Account;
+import com.hackathon.ewallet.auditservice.entity.TransactionStatus;
+import com.hackathon.ewallet.auditservice.entity.User;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+
+@Data
 @Getter
 @Setter
-@Entity
-@Table(name = "transaction")
-public class Transaction {
+public class TransactionDto {
 
 
-	public Transaction(Long id, Account accountId, Double amount) {
+	public TransactionDto(Long id, Account accountId, Double amount) {
 		super();
 		this.id = id;
 		this.accountId = accountId;
@@ -48,5 +59,5 @@ public class Transaction {
     @Column(name = "amount")
     private Double amount;
 
-
 }
+

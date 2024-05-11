@@ -1,18 +1,20 @@
 package com.hackathon.ewallet.auditservice.service;
 
 import java.time.LocalDate;
-import com.hackathon.ewallet.auditservice.entity.Transaction;
+//import com.hackathon.ewallet.auditservice.entity.Transaction;
 import java.util.List;
 import java.util.Optional;
+
+import com.hackathon.ewallet.auditservice.dto.TransactionDto;
 
 
 public interface AuditService {
 	
-	public List<Transaction> getAuditDetailsFromStartToEnd(LocalDate starttime,LocalDate endtime, long user_type_id);
+	public List<TransactionDto> getAuditDetailsFromStartToEnd(LocalDate starttime,LocalDate endtime, long user_type_id);
 	
-	public List<Transaction> getAuditDetailsByDays(Integer days);
+	public List<TransactionDto> getAuditDetailsByDays(Integer days);
 	
-	public Optional<Transaction> getAuditDetailsByTransactioId(Long transaction_id);
+	public TransactionDto getAuditDetailsByTransactioId(Long transaction_id);
 	 
 	
 }
