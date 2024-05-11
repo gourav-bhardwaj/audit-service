@@ -10,10 +10,10 @@ import org.springframework.web.server.ResponseStatusException;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler
+    @ExceptionHandler(ResponseStatusException.class)
     public ProblemDetail handleResponseStatusException(ResponseStatusException ex) {
         log.error("Error: {}, Reason: {}", ex.getMessage(), ex.getReason());
         return ProblemDetail.forStatusAndDetail(ex.getStatusCode(), ex.getMessage());
     }
-    
+
 }
