@@ -1,34 +1,44 @@
 package com.hackathon.ewallet.auditservice.controller;
 
-import java.util.Optional;
-
+import com.hackathon.ewallet.auditservice.dto.TransactionDto;
+import com.hackathon.ewallet.auditservice.entity.Transaction;
+import com.hackathon.ewallet.auditservice.service.AuditService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-import com.hackathon.ewallet.auditservice.dto.TransactionDto;
-import com.hackathon.ewallet.auditservice.serviceImpl.AuditServiceImpl;
+import java.util.List;
 
-import io.swagger.annotations.ApiOperation;
-
-@Controller
+@RestController
 @RequestMapping("/auditDetails")
 public class AuditServiceController {
-	
-	AuditServiceImpl serviceInstance;
-	
-	@ApiOperation(value = "Get a single transaction by ID")
+
+    private AuditService auditService;
+
+    public AuditServiceController(AuditService auditService) {
+        this.auditService = auditService;
+    }
+
+
+	@Operation(description = "Get a single transaction by ID")
 	@GetMapping("/transactions/{id}")
     public ResponseEntity<TransactionDto> getSingleTransaction(@PathVariable Long id) {
-        TransactionDto singleTransaction = serviceInstance.getAuditDetailsByTransactioId(id);
+        TransactionDto singleTransaction = auditService.getAuditDetailsByTransactioId(id);
         if (singleTransaction!=null) {
             return new ResponseEntity<>(singleTransaction, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-	
+
+    @Operation(description = "Get user transactions based on given from and to date")
+    @ApiResponse(responseCode = "200", description = "Provide user details based on from and to date successfully!!")
+    @GetMapping("/users/{accountId}")
+    public ResponseEntity<List<Transaction>> getAuditDetailsFromStartToEnd(@RequestParam("from") String from, @RequestParam("to") String to, @PathVariable Long accountId) {
+        List<Transaction> transactionList = auditService.getAuditDetailsFromStartToEnd(from, to, accountId);
+        return ResponseEntity.ok(transactionList);
+    }
+
 }

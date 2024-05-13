@@ -28,7 +28,7 @@ public class User {
     @Column(name = "age")
     private Integer age;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "user_type_id", referencedColumnName = "id")
     private UserType userTypeId;
 

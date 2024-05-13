@@ -22,7 +22,7 @@ public class Account {
     @Column(name = "account_number")
     private String accountNumber;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "onboarding_status_id", referencedColumnName = "id")
     private OnBoardingStatus onBoardingStatusId;
 
